@@ -145,10 +145,17 @@ def create_or_update_subject(subject: schemas.SubjectCreate, current_user: model
     db.commit()
     db.refresh(db_subject)
     return schemas.Subject(
-        id=db_subject.id, goalId=db_subject.goal_id, name=db_subject.name, color=db_subject.color,
-        trackingMode=db_subject.tracking_mode, schedule=db_subject.schedule,
-        totalStudyHours=db_subject.total_study_hours, totalTargetHours=db_subject.total_target_hours
-    )
+    id=db_subject.id,
+    goalId=db_subject.goal_id,
+    name=db_subject.name,
+    color=db_subject.color,
+    trackingMode=db_subject.tracking_mode,
+    schedule=db_subject.schedule,
+    totalStudyHours=db_subject.total_study_hours,
+    totalTargetHours=db_subject.total_target_hours,
+    owner_id=db_subject.owner_id
+)
+
 
 @app.delete("/subjects/{subject_id}")
 def delete_subject(subject_id: str, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
