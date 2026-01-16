@@ -115,7 +115,8 @@ def read_subjects(current_user: models.User = Depends(get_current_user), db: Ses
         schemas.Subject(
             id=s.id, goalId=s.goal_id, name=s.name, color=s.color,
             trackingMode=s.tracking_mode, schedule=s.schedule,
-            totalStudyHours=s.total_study_hours, totalTargetHours=s.total_target_hours
+            totalStudyHours=s.total_study_hours, totalTargetHours=s.total_target_hours,
+            owner_id=s.owner_id
         ) for s in db_subjects
     ]
 
@@ -174,7 +175,8 @@ def read_notifications(current_user: models.User = Depends(get_current_user), db
         schemas.Notification(
             id=n.id, subjectId=n.subject_id, subjectName=n.subject_name,
             type=n.type, scheduledHours=n.scheduled_hours, scheduledTime=n.scheduled_time,
-            scheduledDate=n.scheduled_date, status=n.status, read=n.read, timestamp=n.timestamp
+            scheduledDate=n.scheduled_date, status=n.status, read=n.read, timestamp=n.timestamp,
+            owner_id=n.owner_id
         ) for n in db_notifs
     ]
 
